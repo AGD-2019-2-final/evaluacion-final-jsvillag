@@ -20,8 +20,6 @@ Knight,KNIGHT,knight
 Noel,NOEL,noel
 Sexton,SEXTON,sexton
 Silva,SILVA,silva
-<BLANKLINE>
-
 """
 import doctest
 import subprocess

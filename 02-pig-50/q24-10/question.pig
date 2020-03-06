@@ -15,14 +15,18 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
-    AS (id:int, 
-        firstname:CHARARRAY, 
-        surname:CHARARRAY, 
-        birthday:CHARARRAY, 
-        color:CHARARRAY, 
-        quantity:INT);
+data = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id: INT,
+        firstname: CHARARRAY,
+        lastname: CHARARRAY,
+        birthday: CHARARRAY,
+        color: CHARARRAY,
+        quantity: INT
+    );
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
 
+x = FOREACH data GENERATE REGEX_EXTRACT($3, '(\\d{4})-(\\d{1,2})-(\\d{1,2})', 2);
+STORE x INTO 'output' USING PigStorage();

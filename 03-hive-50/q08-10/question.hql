@@ -42,3 +42,13 @@ LOAD DATA LOCAL INPATH 'tbl1.csv' INTO TABLE tbl1;
 --
 
 
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+SELECT x.letra, SUM(x.value) 
+FROM (
+    SELECT t0.c2 AS letra, value 
+    FROM tbl0 t0
+    LATERAL VIEW explode(t0.c6) t0
+) x
+GROUP BY x.letra;

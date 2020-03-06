@@ -1,0 +1,28 @@
+mapper
+
+%%writefile mapper.py
+#! /usr/bin/env python3
+import sys
+##
+## Esta es la funcion que mapea la entrada a parejas (clave, valor)
+if __name__ == "__main__":
+    for line in sys.stdin:
+        line_split = line.split("   ")
+        print("{}\t{}".format(line_split[0], line_split[2].strip()))
+
+reduce
+
+if __name__ == "__main__":
+    curkey = None
+    total = 0; count = 0
+    for line in sys.stdin:
+        key, value = line.split("\t")
+        valor = float(valor)
+        if curkey == key:
+            total += value; count += 1
+        else:
+            if curkey is not None:
+                print("{}\t{}\t{}".format(curkey, total, (total/count)))
+            curkey = key
+            total = value; count = 1
+    print("{}\t{}\t{}".format(curkey, total, (total/count)))

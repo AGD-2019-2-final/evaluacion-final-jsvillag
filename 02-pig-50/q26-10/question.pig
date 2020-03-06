@@ -17,13 +17,18 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
-    AS (id:int, 
-        firstname:CHARARRAY, 
-        surname:CHARARRAY, 
-        birthday:CHARARRAY, 
-        color:CHARARRAY, 
-        quantity:INT);
+data = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id: INT,
+        firstname: CHARARRAY,
+        lastname: CHARARRAY,
+        birthday: CHARARRAY,
+        color: CHARARRAY,
+        quantity: INT
+    );
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
+x = FOREACH data GENERATE $1;
+filtro = FILTER x BY LOWER(SUBSTRING(firstname, 0, 1) >= 'm');
+STORE filtro INTO 'output' USING PigStorage();

@@ -1,7 +1,5 @@
-import sys
-#
-#  >>> Escriba el codigo del mapper a partir de este punto <<<
-#
+mapper
+
 if __name__ == "__main__":
     for line in sys.stdin:
         line_split = line.split("   ")
@@ -10,3 +8,14 @@ if __name__ == "__main__":
         number_str = ("0" + number_str) if number_int < 10 else number_str
         print("{}\t{}\t{}\t{}".format(
             number_str, line_split[0],line_split[1],str(number_int)))
+
+
+reduce
+
+if __name__ == "__main__":
+    count = 0
+    for line in sys.stdin:
+        if count < 6:
+            count += 1
+            line_split = line.split("\t")
+            print("{}   {}   {}".format(line_split[1],line_split[2],line_split[3].strip()))
